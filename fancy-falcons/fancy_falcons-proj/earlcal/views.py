@@ -1,11 +1,12 @@
 from datetime import datetime, timedelta, date
 from django.shortcuts import render, get_object_or_404
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponseRedirect
 from django.views import generic
+from django.urls import reverse
 from django.utils.safestring import mark_safe
 from django.contrib.auth.decorators import login_required
 import calendar
-from .models import *
+from .models import Event
 from .utils import Calendar
 from .forms import EventForm
 
@@ -53,14 +54,21 @@ def next_month(d):
     month = 'month=' + str(next_month.year) + '-' + str(next_month.month)
     return month
 
+
 def event_view(request, event_id=None):
     instance = Event()
     if event_id:
         instance = get_object_or_404(Event, pk=event_id)
     return render(request, 'earlcal/event_display.html', {"active_page": "calendar", 'event': instance})
 
+
 @login_required
 def event(request, event_id=None):
+    # If the user is not logged in, simple display of event
+    # if not request.user.is_authenticated:
+
+    # If the user is logged in, editable event display
+    # else :
     instance = Event()
     is_editing = False
     if event_id:
@@ -71,4 +79,5 @@ def event(request, event_id=None):
     if request.POST and form.is_valid():
         form.save()
         return HttpResponseRedirect(reverse('earlcal:calendar'))
-    return render(request, 'earlcal/event.html', {'form': form, "event": instance, "active_page": "calendar", "editing": is_editing})
+    return render(request, 'earlcal/event.html', {'form': form, "event": instance,
+                                                  "active_page": "calendar", "editing": is_editing})
