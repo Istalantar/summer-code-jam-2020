@@ -21,8 +21,10 @@ class Migration(migrations.Migration):
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('content', models.TextField()),
                 ('date', models.DateTimeField(default=django.utils.timezone.now)),
-                ('reciever', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='reciever', to=settings.AUTH_USER_MODEL)),
-                ('sender', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='sender', to=settings.AUTH_USER_MODEL)),
+                ('reciever', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE,
+                                               related_name='reciever', to=settings.AUTH_USER_MODEL)),
+                ('sender', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE,
+                                             related_name='sender', to=settings.AUTH_USER_MODEL)),
             ],
         ),
     ]

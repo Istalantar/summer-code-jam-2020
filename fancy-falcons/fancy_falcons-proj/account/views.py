@@ -4,11 +4,12 @@ from django.contrib.auth.views import LoginView
 from django.contrib.auth.decorators import login_required
 from .forms import UserRegisterForm, UserUpdateForm
 
-class UserLoginView(LoginView):
 
-  def get_context_data(self, **kwargs):
-    kwargs['active_page'] = "login"
-    return super().get_context_data(**kwargs)
+class UserLoginView(LoginView):
+    def get_context_data(self, **kwargs):
+        kwargs['active_page'] = "login"
+        return super().get_context_data(**kwargs)
+
 
 def register(request):
     if request.method == 'POST':

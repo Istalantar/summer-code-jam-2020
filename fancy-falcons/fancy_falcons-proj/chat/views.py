@@ -1,16 +1,13 @@
 from django.urls import reverse, reverse_lazy
-from django.views.generic.edit import (
-    CreateView,
-    DeleteView,
-)
+from django.views.generic.edit import CreateView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
 from django.contrib.auth import get_user_model
 from django.shortcuts import get_object_or_404
 from django.db.models import Q
-
 from .models import Message
+
 
 class UsersChatView(LoginRequiredMixin, ListView):
     model = get_user_model()
