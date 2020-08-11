@@ -3,7 +3,6 @@ from account.models import Account
 from datetime import datetime
 
 
-
 def home(request):
     # Editing Earl of the Day ID should update all data on home page
     earl_of_the_day_id = 2
